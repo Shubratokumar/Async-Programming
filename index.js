@@ -1,12 +1,18 @@
 console.log("Before"); 
-getUser(1, (user)=> {
-    getRepositories(user.userName, (repos)=>{
-        getCommits(repos, (commits)=>{
-            // callback hell problem
-        })
-    })
-});
+getUser(1, getRepositories);
 console.log("After"); 
+
+// Named Function
+function getRepositories (user){
+    getRepositories(user.userName, getCommits)
+}
+function getCommits(repos) {
+    getCommits(repos, displayCommits)
+}
+function displayCommits(commits){
+    console.log(commits)
+}
+
 
 // callback functions
 function getUser ( id, callback ){
