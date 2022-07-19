@@ -1,9 +1,17 @@
 console.log("Before"); 
-getUser(1, getRepositories);
+// getUser(1, getRepositories);
 console.log("After"); 
 
+
+// Consuming promises
+getUser(1)
+ .then(user => getRepositories(user.userName))
+ .then(repos => getCommits(repos[0]))
+ .then(commits => console.log('Commits', commits))
+ .catch(err => console.log("Error", err.message))
+
 // Named Function
-function getRepositories (user){
+/* function getRepositories (user){
     getRepositories(user.userName, getCommits)
 }
 function getCommits(repos) {
@@ -11,7 +19,7 @@ function getCommits(repos) {
 }
 function displayCommits(commits){
     console.log(commits)
-}
+} */
 
 
 // callback functions
