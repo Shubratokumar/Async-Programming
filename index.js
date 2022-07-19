@@ -4,11 +4,25 @@ console.log("After");
 
 
 // Consuming promises
-getUser(1)
+/* getUser(1)
  .then(user => getRepositories(user.userName))
  .then(repos => getCommits(repos[0]))
  .then(commits => console.log('Commits', commits))
- .catch(err => console.log("Error", err.message))
+ .catch(err => console.log("Error", err.message)) */
+
+
+// Async and Await approach
+(async function displayCommits(){
+    try {
+        const user = await getUser(1);
+        const repos = await getRepositories(user);
+        const commits = await getCommits(repos[0]);
+        console.log(commits);
+    }
+    catch(err){
+        console.log("Error", err.message);
+    }
+})()
 
 // Named Function
 /* function getRepositories (user){
@@ -39,7 +53,8 @@ function getRepositories (username){
         setTimeout(() => {
             console.log("Getting repositories...")
             console.log("UserName : ", username)
-            resolve(['repo1', 'repo2', 'repo3'])
+            // resolve(['repo1', 'repo2', 'repo3'])
+            reject(new Error("Could not get the repos now."))
         }, 2000);
    })
 }
