@@ -1,6 +1,6 @@
-console.log("Before")
+console.log("Before"); // sync , blocking 
 setTimeout(() => {
-    console.log("Reading a user info from database.")
+    console.log("Reading a user info from database.");
     
-}, 2000);
-console.log("After")
+}, 2000); // Async , non-blocking 
+console.log("After"); // sync , blocking 
